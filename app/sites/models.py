@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -13,3 +14,5 @@ class Site(Base):
     status = Column(Boolean)
     category_id = Column(Integer, ForeignKey('categories.id'))
     logo_link = Column(String, nullable=False)
+
+    category = relationship("Category", back_populates="sites")

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, float, Float
+from sqlalchemy import Column, Integer, String, Float
 from app.database import Base
 
 class CryptoRate(Base):
