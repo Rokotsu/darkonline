@@ -12,7 +12,13 @@ from app.database import Base
 from app.database import settings
 from app.sites.models import Site
 from app.crypto_rate.models import CryptoRate
-from app.categories.models import Category
+from app.sites.categories.models import Category
+from app.sites.site_comment.models import SiteComment
+from app.users.models import Users
+from app.news.models import News
+from app.product.models import Product
+from app.product.seller_product.models import SellerProduct
+from app.product.product_comment.models import ProductComment
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
