@@ -10,10 +10,10 @@ class ProductComment(Base):
     comment_id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('products.product_id'))
     author = Column(Integer, ForeignKey('users.user_id'))
-    author_avatar = Column(String)
-    text = Column(Text)
+    author_avatar = Column(String, nullable=False)
+    text = Column(String, nullable=False)
     date = Column(DateTime)
-    stars = Column(Integer)
+    stars = Column(Integer, nullable=False)
 
     product = relationship("Product", back_populates="comments")
     author = relationship("User", back_populates="product_comments")

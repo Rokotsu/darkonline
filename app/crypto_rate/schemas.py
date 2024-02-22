@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class SCryptoRate(BaseModel):
+class SCryptoRateInfo(BaseModel):
     id: int
     name: str
     value: float

@@ -9,11 +9,10 @@ class Site(Base):
 
     site_id = Column(Integer, primary_key=True)
     site_name = Column(String, nullable=False)
-    description = Column(Text)
+    description = Column(String, nullable=False)
     recommend = Column(Boolean)
     status = Column(Boolean)
     category_id = Column(Integer, ForeignKey('categories.id'))
     logo_link = Column(String)
 
     category = relationship("Category", back_populates="sites")
-    comments = relationship("SiteComment", back_populates="site")

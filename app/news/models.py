@@ -8,5 +8,5 @@ class News(Base):
     news_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     date = Column(DateTime)
-    text = Column(Text)
-    views = Column(Integer)
+    text = Column(String, nullable=False)
+    views = Column(Integer, nullable=False)
