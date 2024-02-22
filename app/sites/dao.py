@@ -1,8 +1,5 @@
 from sqlalchemy import select
-
-from app.crypto_rate.models import CryptoRate
 from app.dao.base import BaseDAO
-from app.sites.schemas import SResponse
 from app.sites.models import Site
 from app.sites.categories.models import Category
 from app.database import async_session_maker

@@ -11,8 +11,7 @@ app.include_router(router_site)
 
 # Подключение CORS, чтобы запросы к API могли приходить из браузера
 origins = [
-    # 3000 - порт, на котором работает фронтенд на React.js
-    "http://localhost:3000",
+    "https://darkonion.vercel.app/",
 ]
 
 app.add_middleware(
