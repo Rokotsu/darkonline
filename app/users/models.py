@@ -4,13 +4,15 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 
-class Users(Base):
+class User(Base):
     __tablename__ = 'users'
 
-    user_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     username = Column(String, nullable=False)
-    visible_nick = Column(String)
+    visible_nick = Column(String, nullable=False)
+    email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
 
-    site_comments = relationship("SiteComment", back_populates="author")
-    product_comments = relationship("ProductComment", back_populates="author")
+    product_comments = relationship('ProductComment', back_populates='author_name')
+    site_comments = relationship('SiteComment', back_populates='author_name')
+    sellers = relationship('Seller', back_populates='seller')

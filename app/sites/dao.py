@@ -1,36 +1,48 @@
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload, selectinload
+
 from app.dao.base import BaseDAO
 from app.sites.models import Site
-from app.sites.categories.models import Category
 from app.database import async_session_maker
-from typing import List, Dict
 
 
 class SitesDAO(BaseDAO):
     model = Site
 
     @classmethod
-    async def get_sites_with_categories(cls) -> List[dict]:
+    async def get_all_sites(cls):
         async with async_session_maker() as session:
-            query = select(Site, Category).join(Category)
-            result = await session.execute(query)
-            data = result.fetchall()
+            # Выбираем все сайты и загружаем связанные данные
+            result = await session.execute(
+                select(Site).options(
+                    selectinload(Site.category),
+                    selectinload(Site.links)
+                )
+            )
+            sites = result.scalars().all()
 
-            sites_with_categories = []
-            for site, category in data:
-                site_dict = {
+            # Форматируем данные в нужный формат
+            formatted_sites = {}
+            for site in sites:
+                category_name = site.category.name
+                if category_name not in formatted_sites:
+                    formatted_sites[category_name] = []
+
+                formatted_site = {
                     "site_id": site.site_id,
                     "site_name": site.site_name,
                     "description": site.description,
+                    "links": [
+                        {
+                            "domain": link.domain,
+                            "status": link.status,
+                            "response_time": link.response_time
+                        } for link in site.links
+                    ],
                     "recommend": site.recommend,
-                    "status": site.status,
-                    "category_id": site.category_id,
-                    "logo_link": site.logo_link,
-                    "category": category.name
+                    "category": site.category_id,
+                    "logo_link": site.logo_link
                 }
-                sites_with_categories.append(site_dict)
+                formatted_sites[category_name].append(formatted_site)
 
-            return sites_with_categories
-
-
-
+            return formatted_sites

@@ -7,13 +7,14 @@ from app.database import Base
 class SiteComment(Base):
     __tablename__ = 'site_comments'
 
-    comment_id = Column(Integer, primary_key=True)
-    site_id = Column(Integer, ForeignKey('sites.site_id'))
-    author = Column(String)
-    comment = Column(Text)
+    id = Column(Integer, primary_key=True)
+    site_id = Column(Integer, ForeignKey('sites.id'))
+    author = Column(Integer, ForeignKey('users.id'))
+    comment = Column(String, nullable=False)
     date = Column(DateTime)
-    status = Column(String)
-    ip_address = Column(String)
-    user_agent = Column(String)
+    status = Column(String, nullable=False)
+    ip_address = Column(String, nullable=False)
+    user_agent = Column(String, nullable=False)
 
     site = relationship("Site", back_populates="comments")
+    author_name = relationship('User', back_populates="site_comment")
