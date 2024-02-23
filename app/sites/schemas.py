@@ -6,7 +6,6 @@ class SSite(BaseModel):
     site_name: str
     description: str
     recommend: bool
-    status: bool
     category_id: int
     logo_link: str
 

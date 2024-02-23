@@ -10,15 +10,17 @@ sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 from app.config import settings
 from app.database import Base
 from app.database import settings
+from app.news.models import News
+from app.sites.categories.models import Category
+from app.sites.links.models import SiteLink
 from app.sites.models import Site
 from app.crypto_rate.models import CryptoRate
-from app.sites.categories.models import Category
 from app.sites.site_comment.models import SiteComment
 from app.users.models import Users
-from app.news.models import News
 from app.product.models import Product
 from app.product.seller_product.models import SellerProduct
 from app.product.product_comment.models import ProductComment
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

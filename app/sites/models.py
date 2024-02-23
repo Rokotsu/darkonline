@@ -11,8 +11,9 @@ class Site(Base):
     site_name = Column(String, nullable=False)
     description = Column(String, nullable=False)
     recommend = Column(Boolean)
-    status = Column(Boolean)
     category_id = Column(Integer, ForeignKey('categories.id'))
-    logo_link = Column(String)
+    link_id = Column(Integer, ForeignKey('site_links.link_id'))
+    logo_link = Column(String, nullable=False)
 
     category = relationship("Category", back_populates="sites")
+    links = relationship("SiteLink", back_populates="site")
